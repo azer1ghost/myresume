@@ -13,32 +13,11 @@
     <meta name="author" content="ArtTemplate" />
     <meta name="description" content="vCard" />
 
-{{--    <!-- Twitter data -->--}}
-{{--    <meta name="twitter:card" content="summary_large_image">--}}
-{{--    <meta name="twitter:site" content="@ArtTemplates">--}}
-{{--    <meta name="twitter:title" content="vCard">--}}
-{{--    <meta name="twitter:description" content="vCard">--}}
-{{--    <meta name="twitter:image" content="assets/images/social.html">--}}
-
-{{--    <!-- Open Graph data -->--}}
-{{--    <meta property="og:title" content="ArtTemplate" />--}}
-{{--    <meta property="og:type" content="website" />--}}
-{{--    <meta property="og:url" content="your url website" />--}}
-{{--    <meta property="og:image" content="assets/images/social.html" />--}}
-{{--    <meta property="og:description" content="vCard" />--}}
-{{--    <meta property="og:site_name" content="vCard" />--}}
-
-    <!-- Favicons -->
-{{--    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">--}}
-{{--    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicons/apple-touch-icon-114x114.png">--}}
-{{--    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicons/apple-touch-icon-72x72.png">--}}
-{{--    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicons/apple-touch-icon-57x57.png">--}}
-{{--    <link rel="shortcut icon" href="assets/images/favicons/favicon.png" type="image/png">--}}
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="assets/styles/style.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/demo/style-demo.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/styles/custom.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/styles/style.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/demo/style-demo.css')}}"/>
 
 </head>
 <body class="bg-triangles">
@@ -61,15 +40,30 @@
     @include('components.slidenav')
 @endif
 
+<script src="{{asset('js/app.js')}}"></script>
+
 <!-- JavaScripts -->
 <script src="assets/js/jquery-3.4.1.min.js"></script>
 <script src="assets/js/plugins.min.js"></script>
 <script src="assets/js/common.js"></script>
 
 <script src="assets/demo/plugins-demo.js"></script>
+<script>
+    $(function() {
+        let CurrentUrl= document.URL;
+        let CurrentUrlEnd = CurrentUrl.split('/').filter(Boolean).pop();
+
+        $( ".nav li a" ).each(function() {
+            let ThisUrl = $(this).attr('href');
+            let ThisUrlEnd = ThisUrl.split('/').filter(Boolean).pop();
+            if(ThisUrlEnd == CurrentUrlEnd)
+                $(this).addClass('active')
+        });
+    });
+</script>
 
 @yield('scripts')
 </body>
 
-<!-- Mirrored from netgon.net/artstyles/v-card/resume.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Dec 2020 08:07:53 GMT -->
+
 </html>

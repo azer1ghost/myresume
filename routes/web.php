@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index']);
+Route::name('website.')->group(function () {
+    Route::get('/', [FrontendController::class, 'resume'])->name('resume');
+    Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
+});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
